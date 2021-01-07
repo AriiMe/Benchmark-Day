@@ -49,9 +49,9 @@ Router.post("/start", async (req, res) => {
 
 Router.post('/start', async (req, res) => { })
 
-Router.post('/examID/answer', async (req, res) => {
+Router.post('/:examID/answer', async (req, res) => {
     try {
-        const examsDB = await readExam
+        const examsDB = await readExam()
         const selectedExamIndex = examsDB.findIndex((exam) => exam._id === req.params.examID)
         if (selectedExamIndex !== -1) {
             examsDB[selectedExamIndex].questions[req.body.question].providedAnswer = req.body.answer

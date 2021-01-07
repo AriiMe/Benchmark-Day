@@ -15,7 +15,8 @@
           { "text": "adipisicing", "isCorrect": true },
           { "text": "non", "isCorrect": false },
           { "text": "ex", "isCorrect": false }
-        ]
+        ],
+        "providedAnswer": 1
       },
       {
         "duration": 60,
