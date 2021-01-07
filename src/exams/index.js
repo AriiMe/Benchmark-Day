@@ -2,7 +2,7 @@
 
 const express = require("express");
 const uniqid = require("uniqid");
-const { join } = require("path")
+const { join } = require("path");
 const { readExam, readQuestions, writeExam } = require("../lib/utilities");
 const Router = express.Router();
 
@@ -26,8 +26,6 @@ Router.post("/start", async (req, res) => {
             selectedQuestions.forEach((index) => {
                 actualQuestions.push(questionsDB[index]);
             });
-
-
         } catch (error) {
             console.log(error);
         }
@@ -40,29 +38,47 @@ Router.post("/start", async (req, res) => {
             totalDuration: 30,
             questions: actualQuestions,
         });
-        await writeExam(examsDB)
-        res.send("added")
+        await writeExam(examsDB);
+        res.send("added");
     } catch (error) {
         console.log(error);
     }
 });
 
-Router.post('/start', async (req, res) => { })
-
-Router.post('/:examID/answer', async (req, res) => {
+Router.post("/:examID/answer", async (req, res) => {
     try {
-        const examsDB = await readExam()
-        const selectedExamIndex = examsDB.findIndex((exam) => exam._id === req.params.examID)
+        const examsDB = await readExam();
+        const selectedExamIndex = examsDB.findIndex(
+            (exam) => exam._id === req.params.examID
+        );
         if (selectedExamIndex !== -1) {
-            examsDB[selectedExamIndex].questions[req.body.question].providedAnswer = req.body.answer
-            await writeExam(examsDB)
-            res.send("answer recieved")
+            examsDB[selectedExamIndex].questions[req.body.question].providedAnswer =
+                req.body.answer;
+            await writeExam(examsDB);
+            res.send("answer recieved");
         } else {
-            res.send("Can't find exam bruv")
+            res.send("Can't find exam bruv");
         }
     } catch (error) {
         console.log(error);
     }
-})
+});
+
+Router.get("/:examID", async (req, res) => {
+    try {
+        const examsDB = await readExam();
+        const selectedExam = examsDB.find((exam) => exam._id === req.params.examID);
+
+        let score = 0;
+        selectedExam.questions.forEach((question) => {
+            if (question.answer[question.providedAnswer].isCorrect === true)
+                score + 1
+        })
+        selectedExam.score = score;
+        res.send(selectedExam)
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 module.exports = Router;
