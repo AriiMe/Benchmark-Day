@@ -2,12 +2,13 @@
 
 const express = require("express");
 const uniqid = require("uniqid");
-const { readExams, writeExams, readQuestions, writeExam } = require("../lib/utilities");
+const { join } = require("path")
+const { readExam, readQuestions, writeExam } = require("../lib/utilities");
 const Router = express.Router();
 
 Router.post("/start", async (req, res) => {
     try {
-        const examsDB = await readExams();
+        const examsDB = await readExam();
         const questionsDB = await readQuestions();
         const actualQuestions = [];
         try {
@@ -21,7 +22,7 @@ Router.post("/start", async (req, res) => {
                     selectedQuestions.push(questionIndex);
                 }
             }
-            const actualQuestions = [];
+
             selectedQuestions.forEach((index) => {
                 actualQuestions.push(questionsDB[index]);
             });

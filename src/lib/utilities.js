@@ -1,8 +1,8 @@
 const { readJson, writeJson } = require("fs-extra");
 const { join } = require("path");
 
-const examPath = join(__dirname, "../exam/exams.json");
-const questionPath = join(__dirname, "../questions/questions.json")
+const examPath = join(__dirname, "../exams/exams.json");
+const questionsPath = join(__dirname, "../questions/questions.json")
 const readDB = async (filepath) => {
     try {
         const fileJson = await readJson(filepath);
