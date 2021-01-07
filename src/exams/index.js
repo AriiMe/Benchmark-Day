@@ -19,14 +19,15 @@ Router.post("/start", async (req, res) => {
                     selectedQuestions.push(questionIndex);
                 }
             }
-            console.log(selectedQuestions);
+            const actualQuestions = [];
+            selectedQuestions.forEach((index) => {
+                actualQuestions.push(questionsDB[index]);
+            });
+
+
         } catch (error) {
             console.log(error);
         }
-        const actualQuestions = [];
-        selectedQuestions.forEach((index) => {
-            actualQuestions.push(questionsDB[index]);
-        });
 
         examsDB.push({
             ...req.body,
@@ -37,6 +38,7 @@ Router.post("/start", async (req, res) => {
             questions: actualQuestions,
         });
         await writeExam(examsDB)
+        res.send("added")
     } catch (error) {
         console.log(error);
     }
