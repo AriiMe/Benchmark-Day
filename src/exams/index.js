@@ -1,6 +1,7 @@
 /** @format */
 
 const express = require("express");
+const uniqid = require("uniqid");
 const { readExams, writeExams, readQuestions, writeExam } = require("../lib/utilities");
 const Router = express.Router();
 
@@ -8,6 +9,7 @@ Router.post("/start", async (req, res) => {
     try {
         const examsDB = await readExams();
         const questionsDB = await readQuestions();
+        const actualQuestions = [];
         try {
             const selectedQuestions = [];
 
