@@ -10,7 +10,10 @@ Router.post("/start", async (req, res) => {
     try {
         const examsDB = await readExam();
         const questionsDB = await readQuestions();
+
         const actualQuestions = [];
+
+        let examDuration = 0
         try {
             const selectedQuestions = [];
 
@@ -25,6 +28,8 @@ Router.post("/start", async (req, res) => {
 
             selectedQuestions.forEach((index) => {
                 actualQuestions.push(questionsDB[index]);
+                console.log(index)
+                examDuration += questionsDB[index].duration
             });
         } catch (error) {
             console.log(error);
@@ -35,7 +40,7 @@ Router.post("/start", async (req, res) => {
             _id: uniqid(),
             examDate: new Date(),
             isCompleted: false,
-            totalDuration: 30,
+            totalDuration: examDuration,
             questions: actualQuestions,
         });
         await writeExam(examsDB);
