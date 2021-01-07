@@ -79,6 +79,7 @@ Router.get("/:examID", async (req, res) => {
             if (question.answers[question.providedAnswer].isCorrect === true) { score += 1; }
         })
         selectedExam.score = score;
+        selectedExam.isCompleted = true;
         res.send(selectedExam)
     } catch (error) {
         console.log(error);
