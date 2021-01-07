@@ -71,8 +71,7 @@ Router.get("/:examID", async (req, res) => {
 
         let score = 0;
         selectedExam.questions.forEach((question) => {
-            if (question.answer[question.providedAnswer].isCorrect === true)
-                score + 1
+            if (question.answers[question.providedAnswer].isCorrect === true) { score += 1; }
         })
         selectedExam.score = score;
         res.send(selectedExam)

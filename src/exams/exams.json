@@ -26,7 +26,8 @@
           { "text": "nisi", "isCorrect": true },
           { "text": "mollit", "isCorrect": false },
           { "text": "tempor", "isCorrect": false }
-        ]
+        ],
+        "providedAnswer": 1
       },
       {
         "duration": 120,
@@ -37,7 +38,8 @@
           { "text": "sit", "isCorrect": true },
           { "text": "fugiat", "isCorrect": false },
           { "text": "sit", "isCorrect": false }
-        ]
+        ],
+        "providedAnswer": 1
       },
       {
         "duration": 60,
@@ -47,7 +49,8 @@
           { "text": "esse", "isCorrect": true },
           { "text": "enim", "isCorrect": false },
           { "text": "veniam", "isCorrect": false }
-        ]
+        ],
+        "providedAnswer": 1
       },
       {
         "duration": 120,
@@ -58,7 +61,8 @@
           { "text": "magna", "isCorrect": true },
           { "text": "sit", "isCorrect": false },
           { "text": "qui", "isCorrect": false }
-        ]
+        ],
+        "providedAnswer": 1
       }
     ]
   }
